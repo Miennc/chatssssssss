@@ -22,8 +22,10 @@
           </div>
           <div class="text-center mt-6">
             <button @click="signup" class="py-3 w-64 text-xl text-white bg-purple-400 rounded-2xl">Create Account</button>
-            <p class="mt-4 text-sm">Already Have An Account? <span class="underline cursor-pointer"> Sign In</span>
-            </p>
+            <router-link to="/login">
+              <p class="mt-4 text-sm">Already Have An Account? <span class="underline cursor-pointer"> Sign In</span>
+              </p>
+            </router-link>
           </div>
         </div>
         <div class="w-40 h-40 absolute bg-purple-300 rounded-full top-0 right-12 hidden md:block"></div>
@@ -53,6 +55,9 @@ export default {
     async signup() {
       if (this.email == "" || this.password == "" ) {
         alert("không được bo trống trường nào");
+        return;
+      } if(this.password.length < 6){
+        alert("password phải có ít nhất 6 ký tự");
         return;
       }
       try {

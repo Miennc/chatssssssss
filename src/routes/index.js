@@ -14,6 +14,11 @@ export const router = new VueRouter({
             name: 'signup',
             component: () => import('../page/SignUp')
         },
+        {
+            path: '/chat',
+            name: 'chat',
+            component: () => import('../page/Chat')
+        }
 
     ],
     mode: "history"
