@@ -6,9 +6,12 @@
         <div class="hidden col-span-2 lg:block">
           <div class="w-full">
             <div class="relative flex items-center p-3 border-b border-gray-300">
-              <img class="object-cover w-10 h-10 rounded-full"
-                   src="https://i.pinimg.com/236x/e7/89/d3/e789d312b19c04a9b29b30534f53dce2.jpg" alt="username"/>
-              <span class="block ml-2 font-bold text-gray-600">Nhóm chat 1111</span>
+              <img class="object-cover w-20 h-10 rounded-full"
+                   src="https://i.pinimg.com/236x/e7/89/d3/e789d312b19c04a9b29b30534f53dce2.jpg"   alt="username"/>
+              <span class="block ml-2 font-bold text-gray-600 w-full">Nhóm chat 1111</span>
+              <div @click="logout" class="text-end w-full flex justify-end cursor-pointer text-red-500">
+                đăng xuất
+              </div>
               <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
               </span>
             </div>
@@ -87,6 +90,7 @@ import {
   limit,
 } from 'firebase/firestore';
 import {db} from '@/firebase';
+import { getAuth, signInWithCustomToken, signOut, onAuthStateChanged } from "firebase/auth";
 import {getStorage, uploadBytes, ref, getDownloadURL,storage} from "firebase/storage";
 export default {
   name: "Chat",
@@ -100,6 +104,14 @@ export default {
     }
   },
   methods: {
+    logout (){
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        this.$router.push('/login');
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     onChange(e) {
       let file = e.target.files[0];
       let data = []
